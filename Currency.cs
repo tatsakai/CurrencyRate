@@ -20,6 +20,10 @@ namespace Contoso.CurrencyExchange
         public Dictionary<string,double> rate { get; set; }
 
     }
+        public class FunctionResult
+    {
+        public double  Rate { get; set; }
+    }
     public static class Currency
     {
         [FunctionName("Currency")]
@@ -55,7 +59,7 @@ namespace Contoso.CurrencyExchange
                     }
                 }
 
-            return new OkObjectResult(rtnval);
+            return new OkObjectResult(new FunctionResult {Rate = rtnval});
         }
     }
 }
