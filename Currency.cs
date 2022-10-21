@@ -38,7 +38,6 @@ namespace Contoso.CurrencyExchange
             
          
             HttpClient apiclient = new HttpClient();
-            //apiclient.BaseAddress = new System.Uri("https://dotnsf-fx.herokuapp.com/");
 
             string requestBody = await apiclient.GetStringAsync("https://dotnsf-fx.herokuapp.com/");
             CurrencyRale data = JsonSerializer.Deserialize<CurrencyRale>(requestBody);
