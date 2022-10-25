@@ -54,6 +54,7 @@ namespace Contoso.CurrencyExchange
                         stat = data.rate.TryGetValue(Rate, out rtnval);
                         if (stat) rtnval = 1 / rtnval;
                         else rtnval = 0.0;
+
                     }
                 }
 
