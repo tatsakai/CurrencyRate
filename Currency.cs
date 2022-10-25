@@ -22,7 +22,7 @@ namespace Contoso.CurrencyExchange
     }
         public class FunctionResult
     {
-        public double  Rate { get; set; }
+        public string  Rate { get; set; }
     }
     public static class Currency
     {
@@ -58,7 +58,7 @@ namespace Contoso.CurrencyExchange
                     }
                 }
 
-            return new OkObjectResult(new FunctionResult {Rate = rtnval});
+            return new OkObjectResult(new FunctionResult {Rate = rtnval.ToString()});
         }
     }
 }
