@@ -38,10 +38,12 @@ namespace Contoso.CurrencyExchange
             
          
             HttpClient apiclient = new HttpClient();
-
-            string requestBody = await apiclient.GetStringAsync("https://dotnsf-fx.herokuapp.com/");
-            CurrencyRale data = JsonSerializer.Deserialize<CurrencyRale>(requestBody);
-                double rtnval =0.0 ;
+            double rtnval =0.0 ;
+            try
+            {
+                string requestBody = await apiclient.GetStringAsync("https://dotnsf-fx.herokuapp.com/");
+                CurrencyRale data = JsonSerializer.Deserialize<CurrencyRale>(requestBody);
+                
                 if (data != null)
                 {
                     string Rate;
@@ -57,6 +59,11 @@ namespace Contoso.CurrencyExchange
 
                     }
                 }
+            }
+            catch(Exception e)
+            {
+                rtnval = 0.0;
+            }
 
             return new OkObjectResult(new FunctionResult {Rate = rtnval.ToString()});
         }
