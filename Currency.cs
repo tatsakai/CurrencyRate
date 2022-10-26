@@ -65,13 +65,13 @@ namespace Contoso.CurrencyExchange
                             selrate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault();
                             if (selrate != null)
                             {
-                                double calrate = 1 / Convert.ToDouble(selrate.open);
+                                double calrate = 1 / Convert.ToDouble(selrate.bid);
                                 rtnval = calrate.ToString("F5");
                             }
                         }
                         else
                         {
-                            rtnval = selrate.open;
+                            rtnval = selrate.bid;
                         }
                     }
                 }
