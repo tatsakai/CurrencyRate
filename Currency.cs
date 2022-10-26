@@ -57,23 +57,22 @@ namespace Contoso.CurrencyExchange
                     if(data.quotes.Count > 0) 
                     { 
                         Rate = FromCurrency + ToCurrency;
-                        var selrate = from q in data.quotes where q.currencyPairCode.Equals(Rate) select q;
-                        if (selrate.Count<CurrencyRateDetail>() == 0)
+                        //var selrate = from q in data.quotes where q.currencyPairCode.Equals(Rate) select q;
+                        CurrencyRateDetail selrate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault();
+                        if (selrate == null)
                         {
                             Rate = ToCurrency + FromCurrency;
-                            var selratervs = from q in data.quotes where q.currencyPairCode.Equals(Rate) select q;
-                            if(selratervs.Count<CurrencyRateDetail>() > 0)
+                            selrate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault();
+                            if (selrate != null)
                             {
-                                double calrate = 1 / Convert.ToDouble(selratervs.First().open);
+                                double calrate = 1 / Convert.ToDouble(selrate.open);
                                 rtnval = calrate.ToString("F5");
                             }
                         }
                         else
                         {
-                            rtnval = selrate.First().open;
+                            rtnval = selrate.open;
                         }
-
-
                     }
                 }
             }
