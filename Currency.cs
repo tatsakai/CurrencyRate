@@ -16,11 +16,7 @@ namespace Contoso.CurrencyExchange
 
     public class CurrencyRale
     {
-        //public bool status { get; set; }
-        //public string datetime { get; set; }
-        //public Dictionary<string,double> rate { get; set; }
         public List<CurrencyRateDetail>? quotes { get; set; }
-
     }
     public class CurrencyRateDetail
     {
@@ -48,28 +44,15 @@ namespace Contoso.CurrencyExchange
             
          
             HttpClient apiclient = new HttpClient();
-            //double rtnval =0.0 ;
             string rtnval = "0.0";
 
             try
             {
-                //string requestBody = await apiclient.GetStringAsync("https://dotnsf-fx.herokuapp.com/");
                 string requestBody = await apiclient.GetStringAsync("https://www.gaitameonline.com/rateaj/getrate");
                 CurrencyRale data = JsonSerializer.Deserialize<CurrencyRale>(requestBody);
                 
                 if (data != null)
                 {
-
-                //    string Rate;
-                //    bool stat;
-                //    Rate = FromCurrency + ToCurrency;
-                //    stat = data.rate.TryGetValue(Rate, out rtnval);
-                //    if (!stat)
-                //    {
-                //        Rate = ToCurrency + FromCurrency;
-                //        stat = data.rate.TryGetValue(Rate, out rtnval);
-                //        if (stat) rtnval = 1 / rtnval;
-                //        else rtnval = 0.0;
                     string Rate;
                     if(data.quotes.Count > 0) 
                     { 
