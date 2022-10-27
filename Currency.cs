@@ -46,7 +46,8 @@ namespace Contoso.CurrencyExchange
          
             HttpClient apiclient = new HttpClient();
             string rtnval = "0.0";
-
+            string Rate;
+            string SelectedRate;
             try
             {
                 string requestBody = await apiclient.GetStringAsync("https://www.gaitameonline.com/rateaj/getrate");
@@ -54,25 +55,24 @@ namespace Contoso.CurrencyExchange
                 
                 if (data != null)
                 {
-                    string Rate;
                     if(data.quotes.Count > 0) 
                     { 
                         Rate = FromCurrency + ToCurrency;
                         //var selrate = from q in data.quotes where q.currencyPairCode.Equals(Rate) select q;
-                        string selrate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault().ask;
-                        if (selrate == null)
+                        SelectedRate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault().ask;
+                        if (SelectedRate == null)
                         {
                             Rate = ToCurrency + FromCurrency;
-                            selrate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault().ask;
-                            if (selrate != null)
+                            SelectedRate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault().ask;
+                            if (SelectedRate != null)
                             {
-                                double calrate = 1 / Convert.ToDouble(selrate);
+                                double calrate = 1 / Convert.ToDouble(SelectedRate);
                                 rtnval = calrate.ToString("F5");
                             }
                         }
                         else
                         {
-                            rtnval = selrate;
+                            rtnval = SelectedRate;
                         }
                     }
                 }
@@ -80,6 +80,7 @@ namespace Contoso.CurrencyExchange
             catch(Exception e)
             {
                 rtnval = "0.0";
+                Console.WriteLine(e.Message);
             }
 
             return new OkObjectResult(new FunctionResult {Rate = rtnval});
