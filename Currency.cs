@@ -58,7 +58,6 @@ namespace Contoso.CurrencyExchange
                     if(data.quotes.Count > 0) 
                     { 
                         Rate = FromCurrency + ToCurrency;
-                        //var selrate = from q in data.quotes where q.currencyPairCode.Equals(Rate) select q;
                         SelectedRate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault().ask;
                         if (SelectedRate == null)
                         {
@@ -80,7 +79,6 @@ namespace Contoso.CurrencyExchange
             catch(Exception e)
             {
                 rtnval = "0.0";
-                Console.WriteLine(e.Message);
             }
 
             return new OkObjectResult(new FunctionResult {Rate = rtnval});
