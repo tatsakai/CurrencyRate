@@ -36,7 +36,7 @@ namespace Contoso.CurrencyExchange
         [FunctionName("Currency")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            ILogger log, string selrate)
+            ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
@@ -47,7 +47,7 @@ namespace Contoso.CurrencyExchange
             HttpClient apiclient = new HttpClient();
             string rtnval = "0.0";
             string Rate ="";
-            string SelectedRate ="";
+            string selrate ="";
             try
             {
                 string requestBody = await apiclient.GetStringAsync("https://www.gaitameonline.com/rateaj/getrate");
@@ -58,20 +58,20 @@ namespace Contoso.CurrencyExchange
                     if(data.quotes.Count > 0) 
                     { 
                         Rate = FromCurrency + ToCurrency;
-                        SelectedRate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault().ask;
-                        if (SelectedRate == null)
+                        selrate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault().ask;
+                        if (selrate == null)
                         {
                             Rate = ToCurrency + FromCurrency;
-                            SelectedRate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault().ask;
-                            if (SelectedRate != null)
+                            selrate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault().ask;
+                            if (selrate != null)
                             {
-                                double calrate = 1 / Convert.ToDouble(SelectedRate);
+                                double calrate = 1 / Convert.ToDouble(selrate);
                                 rtnval = calrate.ToString("F5");
                             }
                         }
                         else
                         {
-                            rtnval = SelectedRate;
+                            rtnval = selrate;
                         }
                     }
                 }
