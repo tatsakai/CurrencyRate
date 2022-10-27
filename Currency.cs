@@ -24,6 +24,7 @@ namespace Contoso.CurrencyExchange
         public string open { get; set; }
         public string bid { get; set; }
         public string currencyPairCode { get; set; }
+        public string ask { get; set; }
         public string low { get; set; }
     }
     public class FunctionResult
@@ -58,20 +59,20 @@ namespace Contoso.CurrencyExchange
                     { 
                         Rate = FromCurrency + ToCurrency;
                         //var selrate = from q in data.quotes where q.currencyPairCode.Equals(Rate) select q;
-                        CurrencyRateDetail selrate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault();
+                        string selrate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault().ask;
                         if (selrate == null)
                         {
                             Rate = ToCurrency + FromCurrency;
-                            selrate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault();
+                            selrate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault().ask;
                             if (selrate != null)
                             {
-                                double calrate = 1 / Convert.ToDouble(selrate.bid);
+                                double calrate = 1 / Convert.ToDouble(selrate);
                                 rtnval = calrate.ToString("F5");
                             }
                         }
                         else
                         {
-                            rtnval = selrate.bid;
+                            rtnval = selrate;
                         }
                     }
                 }
