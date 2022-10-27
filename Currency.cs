@@ -46,8 +46,8 @@ namespace Contoso.CurrencyExchange
          
             HttpClient apiclient = new HttpClient();
             string rtnval = "0.0";
-            string Rate;
-            string SelectedRate;
+            string Rate ="";
+            string SelectedRate ="";
             try
             {
                 string requestBody = await apiclient.GetStringAsync("https://www.gaitameonline.com/rateaj/getrate");
