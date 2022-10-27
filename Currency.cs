@@ -36,7 +36,7 @@ namespace Contoso.CurrencyExchange
         [FunctionName("Currency")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+            ILogger log, string selrate)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
