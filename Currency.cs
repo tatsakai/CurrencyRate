@@ -16,7 +16,7 @@ namespace Contoso.CurrencyExchange
 
     public class CurrencyRale
     {
-        public List<CurrencyRateDetail>? quotes { get; set; }
+        public List<CurrencyRateDetail> quotes { get; set; }
     }
     public class CurrencyRateDetail
     {
