@@ -79,6 +79,7 @@ namespace Contoso.CurrencyExchange
             catch(Exception e)
             {
                 rtnval = "0.0";
+                log.LogError(e.Message);
             }
 
             return new OkObjectResult(new FunctionResult {Rate = rtnval});
