@@ -42,8 +42,7 @@ namespace Contoso.CurrencyExchange
 
             string FromCurrency = req.Query["From"];
             string ToCurrency   = req.Query["TO"];
-            
-         
+                     
             HttpClient apiclient = new HttpClient();
             string rtnval = "0.0";
             string Rate ="";
