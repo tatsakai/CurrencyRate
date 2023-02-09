@@ -51,7 +51,7 @@ namespace Contoso.CurrencyExchange
             {
                 string requestBody = await apiclient.GetStringAsync("https://www.gaitameonline.com/rateaj/getrate");
                 CurrencyRale data = JsonSerializer.Deserialize<CurrencyRale>(requestBody);
-                
+                //comment
                 if (data != null)
                 {
                     if(data.quotes.Count > 0) 
