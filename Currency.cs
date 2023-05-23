@@ -57,6 +57,7 @@ namespace Contoso.CurrencyExchange
                     if(data.quotes.Count > 0) 
                     { 
                         Rate = FromCurrency + ToCurrency;
+                        
                         selrate = data.quotes.Where(q => q.currencyPairCode.Equals(Rate)).FirstOrDefault().ask;
                         if (selrate == null)
                         {
