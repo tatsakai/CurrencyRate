@@ -39,4 +39,4 @@ jobs:
           app-name: 'CurrencyRateAPI'
           slot-name: 'Production'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FBC550D3C4CB4B3D888A58C079C25A26 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0D05D9EB996D4A11B0ED3D1F2E92E1A2 }}
